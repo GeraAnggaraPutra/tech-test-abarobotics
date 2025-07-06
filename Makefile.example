@@ -18,6 +18,8 @@ run:
 	$(GO_APP) run $(SERVER_FILE)
 build:
 	$(GO_APP) build -o $(BINARY_FILE) $(SERVER_FILE)
+swag:
+	swag init --generalInfo $(SERVER_FILE)
 
 lint:
 	@echo -e "==> start linting..."
