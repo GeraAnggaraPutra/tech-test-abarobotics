@@ -1,0 +1,45 @@
+linters:
+  enable:
+    - errcheck
+    - gosimple
+    - govet
+    - ineffassign
+    - staticcheck
+    - unused
+    - asciicheck
+    - bodyclose
+    - copyloopvar
+    - cyclop # - gocyclo
+    - errname
+    - errorlint
+    - goconst
+    - gocritic
+    - godot
+    - gofumpt
+    - gosec
+    - misspell
+    - mnd
+    - nilnil
+    - noctx
+    - prealloc
+    - revive
+    - rowserrcheck
+    - sqlclosecheck
+    - unconvert
+    - unparam
+    - usestdlibvars
+    - wsl
+linters-settings:
+  cyclop:
+    max-complexity: 25 # default 15
+  gosec:
+    excludes:
+      - G101
+issues:
+  exclude-rules:
+    - path: src/util/string.go
+      linters:
+        - gosec
+    - path: src/handler/validator/validator.go
+      linters:
+        - errorlint

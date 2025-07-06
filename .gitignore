@@ -1,0 +1,13 @@
+# IDE related
+.vscode/
+.idea/
+
+# Dev build
+build/
+tmp/
+
+# Env variables
+credentials/
+vendor/
+.env
+Makefile
