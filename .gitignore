@@ -7,7 +7,8 @@ build/
 tmp/
 
 # Env variables
-credentials/
+credentials/*
+!credentials/.gitkeep
 vendor/
 .env
 Makefile
