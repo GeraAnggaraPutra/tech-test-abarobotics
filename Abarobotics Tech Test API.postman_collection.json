@@ -1,0 +1,1769 @@
+{
+	"info": {
+		"_postman_id": "cab707a7-86c6-4244-b4f5-32e65e1c1b57",
+		"name": "Abarobotics Tech Test API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "27362852"
+	},
+	"item": [
+		{
+			"name": "Authentication",
+			"item": [
+				{
+					"name": "Login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"{\r",
+									"    var json = pm.response.json();\r",
+									"    pm.variables\r",
+									"    pm.collectionVariables.set(\"token\", json.data.access_token);\r",
+									"    pm.collectionVariables.set(\"refresh-token\", json.data.refresh_token)\r",
+									"\r",
+									"    pm.environment.set(\"token\", json.data.access_token);\r",
+									"    pm.environment.set(\"refresh-token\", json.data.refresh_token)\r",
+									"}"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"admin@gmail.com\",\r\n    \"password\": \"password\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/auth/login",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"email\": \"admin@gmail.com\",\r\n    \"password\": \"password\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/auth/login",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"auth",
+										"login"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Sun, 06 Jul 2025 05:14:34 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "828"
+								},
+								{
+									"key": "X-Ratelimit-Limit",
+									"value": "20"
+								},
+								{
+									"key": "X-Ratelimit-Remaining",
+									"value": "19"
+								},
+								{
+									"key": "X-Ratelimit-Reset",
+									"value": "60"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": {\n        \"access_token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3NTI0OTg4NzQsImp0aSI6IjAxOTdkZTI4LTU2MTItNzY4Zi05MDg3LTg1MzUyNTJhNTBmNyIsInVyaSI6IjBhZDA4MDJiLTI4YjQtNDM2Mi1iZWFmLWQyMjBjNjE5YmUxNiJ9.W5kAgZmev0gXS4HoxAmBUEqSklRLOkJ-wK72MBxYhpU\",\n        \"access_token_expired_at\": \"2025-07-14T13:14:34.89843Z\",\n        \"refresh_token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3NTE4NjUyNzQsImp0aSI6IjAxOTdkZTI4LTU2MTItNzY4Zi05MDg3LTg1MzUyNTJhNTBmNyJ9.uG3lwjPVFbJY-4Rbmv33JLWpc15jH4roAKgOLNvK5Uk\",\n        \"refresh_token_expired_at\": \"2025-07-07T05:14:34.8989894Z\",\n        \"user\": {\n            \"guid\": \"0ad0802b-28b4-4362-beaf-d220c619be16\",\n            \"email\": \"admin@gmail.com\",\n            \"role\": {\n                \"guid\": \"acc77b2a-d4db-47aa-a2d4-f50e363cc384\",\n                \"name\": \"Admin\"\n            },\n            \"created_at\": \"2025-07-06T11:31:52.161033Z\",\n            \"created_by\": \"system\",\n            \"updated_at\": null,\n            \"updated_by\": null\n        }\n    },\n    \"message\": \"Success login\"\n}"
+						},
+						{
+							"name": "Account Not Found",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"email\": \"admin1@gmail.com\",\r\n    \"password\": \"password\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/auth/login",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"auth",
+										"login"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Sun, 06 Jul 2025 05:13:43 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "64"
+								},
+								{
+									"key": "X-Ratelimit-Limit",
+									"value": "20"
+								},
+								{
+									"key": "X-Ratelimit-Remaining",
+									"value": "18"
+								},
+								{
+									"key": "X-Ratelimit-Reset",
+									"value": "47"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"error\": {\n        \"email\": \"Account not found\"\n    },\n    \"message\": \"Failed login\"\n}"
+						},
+						{
+							"name": "Password Incorrect",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"email\": \"admin@gmail.com\",\r\n    \"password\": \"wrong\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/auth/login",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"auth",
+										"login"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Sun, 06 Jul 2025 05:14:16 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "68"
+								},
+								{
+									"key": "X-Ratelimit-Limit",
+									"value": "20"
+								},
+								{
+									"key": "X-Ratelimit-Remaining",
+									"value": "17"
+								},
+								{
+									"key": "X-Ratelimit-Reset",
+									"value": "14"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"error\": {\n        \"password\": \"Password incorrect\"\n    },\n    \"message\": \"Failed login\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Refresh Token",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"{\r",
+									"    var json = pm.response.json();\r",
+									"    pm.variables\r",
+									"    pm.collectionVariables.set(\"token\", json.data.access_token);\r",
+									"    pm.collectionVariables.set(\"refresh-token\", json.data.refresh_token)\r",
+									"\r",
+									"    pm.environment.set(\"token\", json.data.access_token);\r",
+									"    pm.environment.set(\"refresh-token\", json.data.refresh_token)\r",
+									"}"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"refresh_token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3NTE5NTE4NTQsImp0aSI6IjAxOTdkZTJiLTE1NGUtNzAwYS04ZGE4LWI0NjVjMWU4Mzg1MCJ9.BbwHBALVTCFc7UIhq07ZGO-5gYsqdcapY7GQtfiwox0\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/auth/refresh-token",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"auth",
+								"refresh-token"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"refresh_token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3NTE5NTE4NTQsImp0aSI6IjAxOTdkZTJiLTE1NGUtNzAwYS04ZGE4LWI0NjVjMWU4Mzg1MCJ9.BbwHBALVTCFc7UIhq07ZGO-5gYsqdcapY7GQtfiwox0\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/auth/refresh-token",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"auth",
+										"refresh-token"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Sun, 06 Jul 2025 05:26:23 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "838"
+								},
+								{
+									"key": "X-Ratelimit-Limit",
+									"value": "20"
+								},
+								{
+									"key": "X-Ratelimit-Remaining",
+									"value": "19"
+								},
+								{
+									"key": "X-Ratelimit-Reset",
+									"value": "60"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": {\n        \"access_token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3NTE4NjU5ODMsImp0aSI6IjAxOTdkZTJiLTE1NGUtNzAwYS04ZGE4LWI0NjVjMWU4Mzg1MCIsInVyaSI6IjBhZDA4MDJiLTI4YjQtNDM2Mi1iZWFmLWQyMjBjNjE5YmUxNiJ9.K_ADJySvsIenhto2Fm8c_rRmrZjlEX3ZEdVEvYn_4mw\",\n        \"access_token_expired_at\": \"2025-07-07T05:26:23.6929735Z\",\n        \"refresh_token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3NTE5NTIzODMsImp0aSI6IjAxOTdkZTJiLTE1NGUtNzAwYS04ZGE4LWI0NjVjMWU4Mzg1MCJ9.R6DzQ351gSjwZgbpKmU2TyyLUNTVxxzNHrSCTODslq8\",\n        \"refresh_token_expired_at\": \"2025-07-08T05:26:23.6929735Z\",\n        \"user\": {\n            \"guid\": \"0ad0802b-28b4-4362-beaf-d220c619be16\",\n            \"email\": \"admin@gmail.com\",\n            \"role\": {\n                \"guid\": \"acc77b2a-d4db-47aa-a2d4-f50e363cc384\",\n                \"name\": \"Admin\"\n            },\n            \"created_at\": \"2025-07-06T11:31:52.161033Z\",\n            \"created_by\": \"system\",\n            \"updated_at\": null,\n            \"updated_by\": null\n        }\n    },\n    \"message\": \"Success refresh token\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Logout",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/auth/logout",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"auth",
+								"logout"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/auth/logout",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"auth",
+										"logout"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Sun, 06 Jul 2025 05:43:40 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "40"
+								},
+								{
+									"key": "X-Ratelimit-Limit",
+									"value": "20"
+								},
+								{
+									"key": "X-Ratelimit-Remaining",
+									"value": "19"
+								},
+								{
+									"key": "X-Ratelimit-Reset",
+									"value": "60"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": null,\n    \"message\": \"Success logout\"\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "User Management",
+			"item": [
+				{
+					"name": "Read List",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/users?sort=created_at&direction=DESC&page=1&limit=10",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"users"
+							],
+							"query": [
+								{
+									"key": "search",
+									"value": "admin",
+									"disabled": true
+								},
+								{
+									"key": "sort",
+									"value": "created_at",
+									"description": "email, role_name, created_at, updated_at"
+								},
+								{
+									"key": "direction",
+									"value": "DESC",
+									"description": "ASC, DESC"
+								},
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "limit",
+									"value": "10"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/users?sort=created_at&direction=DESC&page=1&limit=10",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"users"
+									],
+									"query": [
+										{
+											"key": "search",
+											"value": "admin",
+											"disabled": true
+										},
+										{
+											"key": "sort",
+											"value": "created_at",
+											"description": "email, role_name, created_at, updated_at"
+										},
+										{
+											"key": "direction",
+											"value": "DESC",
+											"description": "ASC, DESC"
+										},
+										{
+											"key": "page",
+											"value": "1"
+										},
+										{
+											"key": "limit",
+											"value": "10"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Sun, 06 Jul 2025 05:57:16 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "865"
+								},
+								{
+									"key": "X-Ratelimit-Limit",
+									"value": "20"
+								},
+								{
+									"key": "X-Ratelimit-Remaining",
+									"value": "18"
+								},
+								{
+									"key": "X-Ratelimit-Reset",
+									"value": "50"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": [\n        {\n            \"guid\": \"0ad0802b-28b4-4362-beaf-d220c619be16\",\n            \"email\": \"admin@gmail.com\",\n            \"role\": {\n                \"guid\": \"acc77b2a-d4db-47aa-a2d4-f50e363cc384\",\n                \"name\": \"Admin\"\n            },\n            \"created_at\": \"2025-07-06T11:31:52.161033Z\",\n            \"created_by\": \"system\",\n            \"updated_at\": null,\n            \"updated_by\": null\n        },\n        {\n            \"guid\": \"cb97f8c0-7eda-4b1a-8f7c-f0b02e4b7832\",\n            \"email\": \"viewer@gmail.com\",\n            \"role\": {\n                \"guid\": \"29d47d9a-8576-48f4-a818-ccafed7d20d3\",\n                \"name\": \"Viewer\"\n            },\n            \"created_at\": \"2025-07-06T11:31:52.161033Z\",\n            \"created_by\": \"system\",\n            \"updated_at\": null,\n            \"updated_by\": null\n        },\n        {\n            \"guid\": \"e76187b8-27f2-4a02-b741-b75b50d9d003\",\n            \"email\": \"technician@gmail.com\",\n            \"role\": {\n                \"guid\": \"899bd3a8-a3d4-4043-a8a3-83bd7e649f25\",\n                \"name\": \"Technician\"\n            },\n            \"created_at\": \"2025-07-06T11:31:52.161033Z\",\n            \"created_by\": \"system\",\n            \"updated_at\": null,\n            \"updated_by\": null\n        }\n    ],\n    \"message\": \"Success get user list\",\n    \"paginate\": {\n        \"current_page\": 1,\n        \"per_page\": 10,\n        \"total_page\": 1,\n        \"total_data\": 3\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Read Detail",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/users/:guid",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"users",
+								":guid"
+							],
+							"variable": [
+								{
+									"key": "guid",
+									"value": "0ad0802b-28b4-4362-beaf-d220c619be16"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/users/:guid",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"users",
+										":guid"
+									],
+									"variable": [
+										{
+											"key": "guid",
+											"value": "0ad0802b-28b4-4362-beaf-d220c619be16"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Sun, 06 Jul 2025 05:59:07 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "1621"
+								},
+								{
+									"key": "X-Ratelimit-Limit",
+									"value": "20"
+								},
+								{
+									"key": "X-Ratelimit-Remaining",
+									"value": "19"
+								},
+								{
+									"key": "X-Ratelimit-Reset",
+									"value": "60"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": {\n        \"guid\": \"0ad0802b-28b4-4362-beaf-d220c619be16\",\n        \"email\": \"admin@gmail.com\",\n        \"role\": {\n            \"guid\": \"acc77b2a-d4db-47aa-a2d4-f50e363cc384\",\n            \"name\": \"Admin\"\n        },\n        \"created_at\": \"2025-07-06T11:31:52.161033Z\",\n        \"created_by\": \"system\",\n        \"updated_at\": null,\n        \"updated_by\": null,\n        \"permissions\": [\n            {\n                \"guid\": \"ea1dcd0d-8d13-489b-b721-073c17fe4685\",\n                \"name\": \"Device Management\",\n                \"actions\": [\n                    {\n                        \"guid\": \"4340001a-eca5-4325-ae09-371ad01853ae\",\n                        \"name\": \"create\",\n                        \"is_checked\": true,\n                        \"role_permission_guid\": \"fac00778-37e7-4713-8aad-3190ceeccee1\"\n                    },\n                    {\n                        \"guid\": \"8901efa6-cd1f-47af-a8c0-2b557ed25724\",\n                        \"name\": \"delete\",\n                        \"is_checked\": true,\n                        \"role_permission_guid\": \"fac00778-37e7-4713-8aad-3190ceeccee1\"\n                    },\n                    {\n                        \"guid\": \"fb37f7ee-a7cc-474c-916d-9612975af4eb\",\n                        \"name\": \"edit\",\n                        \"is_checked\": true,\n                        \"role_permission_guid\": \"fac00778-37e7-4713-8aad-3190ceeccee1\"\n                    },\n                    {\n                        \"guid\": \"19e9b2a8-5ed6-46b9-bb75-278d867798fc\",\n                        \"name\": \"view\",\n                        \"is_checked\": true,\n                        \"role_permission_guid\": \"fac00778-37e7-4713-8aad-3190ceeccee1\"\n                    }\n                ]\n            },\n            {\n                \"guid\": \"ef3b6da0-4fda-4c0b-951d-c95b19880940\",\n                \"name\": \"User Management\",\n                \"actions\": [\n                    {\n                        \"guid\": \"4340001a-eca5-4325-ae09-371ad01853ae\",\n                        \"name\": \"create\",\n                        \"is_checked\": true,\n                        \"role_permission_guid\": \"8b9902c3-0c50-4001-a931-4ed1637f4c6e\"\n                    },\n                    {\n                        \"guid\": \"8901efa6-cd1f-47af-a8c0-2b557ed25724\",\n                        \"name\": \"delete\",\n                        \"is_checked\": true,\n                        \"role_permission_guid\": \"8b9902c3-0c50-4001-a931-4ed1637f4c6e\"\n                    },\n                    {\n                        \"guid\": \"fb37f7ee-a7cc-474c-916d-9612975af4eb\",\n                        \"name\": \"edit\",\n                        \"is_checked\": true,\n                        \"role_permission_guid\": \"8b9902c3-0c50-4001-a931-4ed1637f4c6e\"\n                    },\n                    {\n                        \"guid\": \"19e9b2a8-5ed6-46b9-bb75-278d867798fc\",\n                        \"name\": \"view\",\n                        \"is_checked\": true,\n                        \"role_permission_guid\": \"8b9902c3-0c50-4001-a931-4ed1637f4c6e\"\n                    }\n                ]\n            }\n        ]\n    },\n    \"message\": \"Success get user detail\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Read Profile",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/users/me",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"users",
+								"me"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/users/me",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"users",
+										"me"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Sun, 06 Jul 2025 06:01:43 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "1622"
+								},
+								{
+									"key": "X-Ratelimit-Limit",
+									"value": "20"
+								},
+								{
+									"key": "X-Ratelimit-Remaining",
+									"value": "19"
+								},
+								{
+									"key": "X-Ratelimit-Reset",
+									"value": "60"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": {\n        \"guid\": \"0ad0802b-28b4-4362-beaf-d220c619be16\",\n        \"email\": \"admin@gmail.com\",\n        \"role\": {\n            \"guid\": \"acc77b2a-d4db-47aa-a2d4-f50e363cc384\",\n            \"name\": \"Admin\"\n        },\n        \"created_at\": \"2025-07-06T11:31:52.161033Z\",\n        \"created_by\": \"system\",\n        \"updated_at\": null,\n        \"updated_by\": null,\n        \"permissions\": [\n            {\n                \"guid\": \"ea1dcd0d-8d13-489b-b721-073c17fe4685\",\n                \"name\": \"Device Management\",\n                \"actions\": [\n                    {\n                        \"guid\": \"4340001a-eca5-4325-ae09-371ad01853ae\",\n                        \"name\": \"create\",\n                        \"is_checked\": true,\n                        \"role_permission_guid\": \"fac00778-37e7-4713-8aad-3190ceeccee1\"\n                    },\n                    {\n                        \"guid\": \"8901efa6-cd1f-47af-a8c0-2b557ed25724\",\n                        \"name\": \"delete\",\n                        \"is_checked\": true,\n                        \"role_permission_guid\": \"fac00778-37e7-4713-8aad-3190ceeccee1\"\n                    },\n                    {\n                        \"guid\": \"fb37f7ee-a7cc-474c-916d-9612975af4eb\",\n                        \"name\": \"edit\",\n                        \"is_checked\": true,\n                        \"role_permission_guid\": \"fac00778-37e7-4713-8aad-3190ceeccee1\"\n                    },\n                    {\n                        \"guid\": \"19e9b2a8-5ed6-46b9-bb75-278d867798fc\",\n                        \"name\": \"view\",\n                        \"is_checked\": true,\n                        \"role_permission_guid\": \"fac00778-37e7-4713-8aad-3190ceeccee1\"\n                    }\n                ]\n            },\n            {\n                \"guid\": \"ef3b6da0-4fda-4c0b-951d-c95b19880940\",\n                \"name\": \"User Management\",\n                \"actions\": [\n                    {\n                        \"guid\": \"4340001a-eca5-4325-ae09-371ad01853ae\",\n                        \"name\": \"create\",\n                        \"is_checked\": true,\n                        \"role_permission_guid\": \"8b9902c3-0c50-4001-a931-4ed1637f4c6e\"\n                    },\n                    {\n                        \"guid\": \"8901efa6-cd1f-47af-a8c0-2b557ed25724\",\n                        \"name\": \"delete\",\n                        \"is_checked\": true,\n                        \"role_permission_guid\": \"8b9902c3-0c50-4001-a931-4ed1637f4c6e\"\n                    },\n                    {\n                        \"guid\": \"fb37f7ee-a7cc-474c-916d-9612975af4eb\",\n                        \"name\": \"edit\",\n                        \"is_checked\": true,\n                        \"role_permission_guid\": \"8b9902c3-0c50-4001-a931-4ed1637f4c6e\"\n                    },\n                    {\n                        \"guid\": \"19e9b2a8-5ed6-46b9-bb75-278d867798fc\",\n                        \"name\": \"view\",\n                        \"is_checked\": true,\n                        \"role_permission_guid\": \"8b9902c3-0c50-4001-a931-4ed1637f4c6e\"\n                    }\n                ]\n            }\n        ]\n    },\n    \"message\": \"Success get user profile\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Create",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"new@gmail.com\",\r\n    \"password\": \"pass123\",\r\n    \"role_guid\": \"acc77b2a-d4db-47aa-a2d4-f50e363cc384\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/users",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"users"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"email\": \"new@gmail.com\",\r\n    \"password\": \"pass123\",\r\n    \"role_guid\": \"acc77b2a-d4db-47aa-a2d4-f50e363cc384\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/users",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"users"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Sun, 06 Jul 2025 06:03:15 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "45"
+								},
+								{
+									"key": "X-Ratelimit-Limit",
+									"value": "20"
+								},
+								{
+									"key": "X-Ratelimit-Remaining",
+									"value": "18"
+								},
+								{
+									"key": "X-Ratelimit-Reset",
+									"value": "37"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": null,\n    \"message\": \"Success create user\"\n}"
+						},
+						{
+							"name": "Email Already Exists",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"email\": \"admin@gmail.com\",\r\n    \"password\": \"pass123\",\r\n    \"role_guid\": \"acc77b2a-d4db-47aa-a2d4-f50e363cc384\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/users",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"users"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Sun, 06 Jul 2025 06:02:52 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "101"
+								},
+								{
+									"key": "X-Ratelimit-Limit",
+									"value": "20"
+								},
+								{
+									"key": "X-Ratelimit-Remaining",
+									"value": "19"
+								},
+								{
+									"key": "X-Ratelimit-Reset",
+									"value": "60"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"error\": {\n        \"email\": \"Email already exists\"\n    },\n    \"message\": \"Email already exists, please use another email\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Update",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"new1@gmail.com\",\r\n    \"password\": \"\",\r\n    \"role_guid\": \"acc77b2a-d4db-47aa-a2d4-f50e363cc384\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/users/:guid",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"users",
+								":guid"
+							],
+							"variable": [
+								{
+									"key": "guid",
+									"value": "0197de54-e608-72bc-82e6-1b182f4ef52e"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"email\": \"new1@gmail.com\",\r\n    \"password\": \"\",\r\n    \"role_guid\": \"acc77b2a-d4db-47aa-a2d4-f50e363cc384\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/users/:guid",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"users",
+										":guid"
+									],
+									"variable": [
+										{
+											"key": "guid",
+											"value": "0197de54-e608-72bc-82e6-1b182f4ef52e"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Sun, 06 Jul 2025 06:15:20 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "45"
+								},
+								{
+									"key": "X-Ratelimit-Limit",
+									"value": "20"
+								},
+								{
+									"key": "X-Ratelimit-Remaining",
+									"value": "18"
+								},
+								{
+									"key": "X-Ratelimit-Reset",
+									"value": "42"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": null,\n    \"message\": \"Success update user\"\n}"
+						},
+						{
+							"name": "Email Already Exists",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"email\": \"viewer@gmail.com\",\r\n    \"password\": \"\",\r\n    \"role_guid\": \"acc77b2a-d4db-47aa-a2d4-f50e363cc384\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/users/:guid",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"users",
+										":guid"
+									],
+									"variable": [
+										{
+											"key": "guid",
+											"value": "0197de54-e608-72bc-82e6-1b182f4ef52e"
+										}
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Sun, 06 Jul 2025 06:11:53 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "101"
+								},
+								{
+									"key": "X-Ratelimit-Limit",
+									"value": "20"
+								},
+								{
+									"key": "X-Ratelimit-Remaining",
+									"value": "19"
+								},
+								{
+									"key": "X-Ratelimit-Reset",
+									"value": "60"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"error\": {\n        \"email\": \"Email already exists\"\n    },\n    \"message\": \"Email already exists, please use another email\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Delete",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/users/:guid",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"users",
+								":guid"
+							],
+							"variable": [
+								{
+									"key": "guid",
+									"value": "0197de54-e608-72bc-82e6-1b182f4ef52e"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/users/:guid",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"users",
+										":guid"
+									],
+									"variable": [
+										{
+											"key": "guid",
+											"value": "0197de54-e608-72bc-82e6-1b182f4ef52e"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Sun, 06 Jul 2025 06:16:06 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "45"
+								},
+								{
+									"key": "X-Ratelimit-Limit",
+									"value": "20"
+								},
+								{
+									"key": "X-Ratelimit-Remaining",
+									"value": "19"
+								},
+								{
+									"key": "X-Ratelimit-Reset",
+									"value": "60"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": null,\n    \"message\": \"Success delete user\"\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Device Management",
+			"item": [
+				{
+					"name": "Read List",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/devices?sort=name&direction=DESC&page=1&limit=10",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"devices"
+							],
+							"query": [
+								{
+									"key": "search",
+									"value": "2",
+									"disabled": true
+								},
+								{
+									"key": "sort",
+									"value": "name",
+									"description": "name, location, status, created_at, updated_at"
+								},
+								{
+									"key": "direction",
+									"value": "DESC",
+									"description": "ASC, DESC"
+								},
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "limit",
+									"value": "10"
+								},
+								{
+									"key": "status",
+									"value": "online",
+									"description": "online, offline",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/devices?sort=name&direction=DESC&page=1&limit=10",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"devices"
+									],
+									"query": [
+										{
+											"key": "search",
+											"value": "2",
+											"disabled": true
+										},
+										{
+											"key": "sort",
+											"value": "name",
+											"description": "name, location, status, created_at, updated_at"
+										},
+										{
+											"key": "direction",
+											"value": "DESC",
+											"description": "ASC, DESC"
+										},
+										{
+											"key": "page",
+											"value": "1"
+										},
+										{
+											"key": "limit",
+											"value": "10"
+										},
+										{
+											"key": "status",
+											"value": "online",
+											"description": "online, offline",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Sun, 06 Jul 2025 06:32:16 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "1315"
+								},
+								{
+									"key": "X-Ratelimit-Limit",
+									"value": "20"
+								},
+								{
+									"key": "X-Ratelimit-Remaining",
+									"value": "16"
+								},
+								{
+									"key": "X-Ratelimit-Reset",
+									"value": "34"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": [\n        {\n            \"guid\": \"0197de6b-0d71-7102-9413-2ee874e14cfa\",\n            \"name\": \"Device 5\",\n            \"location\": \"Location 5\",\n            \"status\": \"online\",\n            \"created_at\": \"2025-07-06T06:27:27.217329Z\",\n            \"created_by\": \"0ad0802b-28b4-4362-beaf-d220c619be16\",\n            \"updated_at\": null,\n            \"updated_by\": null\n        },\n        {\n            \"guid\": \"0197de6a-def9-7cbc-a9d0-15baea40a401\",\n            \"name\": \"Device 4\",\n            \"location\": \"Location 4\",\n            \"status\": \"offline\",\n            \"created_at\": \"2025-07-06T06:27:15.32219Z\",\n            \"created_by\": \"0ad0802b-28b4-4362-beaf-d220c619be16\",\n            \"updated_at\": null,\n            \"updated_by\": null\n        },\n        {\n            \"guid\": \"0197de68-3d14-7163-8916-9b2e01c8692a\",\n            \"name\": \"Device 3\",\n            \"location\": \"Location 3\",\n            \"status\": \"online\",\n            \"created_at\": \"2025-07-06T06:24:22.804121Z\",\n            \"created_by\": \"0ad0802b-28b4-4362-beaf-d220c619be16\",\n            \"updated_at\": null,\n            \"updated_by\": null\n        },\n        {\n            \"guid\": \"0197de68-226d-7d00-80e2-d4adf76cf55e\",\n            \"name\": \"Device 2\",\n            \"location\": \"Location 2\",\n            \"status\": \"online\",\n            \"created_at\": \"2025-07-06T06:24:15.982158Z\",\n            \"created_by\": \"0ad0802b-28b4-4362-beaf-d220c619be16\",\n            \"updated_at\": null,\n            \"updated_by\": null\n        },\n        {\n            \"guid\": \"0197de67-e73c-7334-8823-1c87fe8a69d8\",\n            \"name\": \"Device 1\",\n            \"location\": \"Location 1\",\n            \"status\": \"online\",\n            \"created_at\": \"2025-07-06T06:24:00.828345Z\",\n            \"created_by\": \"0ad0802b-28b4-4362-beaf-d220c619be16\",\n            \"updated_at\": null,\n            \"updated_by\": null\n        }\n    ],\n    \"message\": \"Success get device list\",\n    \"paginate\": {\n        \"current_page\": 1,\n        \"per_page\": 10,\n        \"total_page\": 1,\n        \"total_data\": 5\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Read Detail",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/devices/:guid",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"devices",
+								":guid"
+							],
+							"variable": [
+								{
+									"key": "guid",
+									"value": "0197de6b-0d71-7102-9413-2ee874e14cfa"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/devices/:guid",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"devices",
+										":guid"
+									],
+									"variable": [
+										{
+											"key": "guid",
+											"value": "0197de6b-0d71-7102-9413-2ee874e14cfa"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Sun, 06 Jul 2025 06:35:55 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "285"
+								},
+								{
+									"key": "X-Ratelimit-Limit",
+									"value": "20"
+								},
+								{
+									"key": "X-Ratelimit-Remaining",
+									"value": "19"
+								},
+								{
+									"key": "X-Ratelimit-Reset",
+									"value": "60"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": {\n        \"guid\": \"0197de6b-0d71-7102-9413-2ee874e14cfa\",\n        \"name\": \"Device 5\",\n        \"location\": \"Location 5\",\n        \"status\": \"online\",\n        \"created_at\": \"2025-07-06T06:27:27.217329Z\",\n        \"created_by\": \"0ad0802b-28b4-4362-beaf-d220c619be16\",\n        \"updated_at\": null,\n        \"updated_by\": null\n    },\n    \"message\": \"Success get device detail\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Create",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Device 5\",\r\n    \"location\": \"Location 5\",\r\n    \"status\": \"online\" // online, offline\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/devices",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"devices"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"Device 5\",\r\n    \"location\": \"Location 5\",\r\n    \"status\": \"online\" // online, offline\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/devices",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"devices"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Sun, 06 Jul 2025 06:27:26 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "47"
+								},
+								{
+									"key": "X-Ratelimit-Limit",
+									"value": "20"
+								},
+								{
+									"key": "X-Ratelimit-Remaining",
+									"value": "19"
+								},
+								{
+									"key": "X-Ratelimit-Reset",
+									"value": "60"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": null,\n    \"message\": \"Success create device\"\n}"
+						},
+						{
+							"name": "Invalid Status",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"Device 3\",\r\n    \"location\": \"Location 3\",\r\n    \"status\": \"onlines\" // online, offline\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/devices",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"devices"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Sun, 06 Jul 2025 06:26:23 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "117"
+								},
+								{
+									"key": "X-Ratelimit-Limit",
+									"value": "20"
+								},
+								{
+									"key": "X-Ratelimit-Remaining",
+									"value": "19"
+								},
+								{
+									"key": "X-Ratelimit-Reset",
+									"value": "60"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"error\": {\n        \"status\": \"Field Status must be one of [online offline]\"\n    },\n    \"message\": \"There are some errors in your request\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Update",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Device 10\",\r\n    \"location\": \"Location 5\",\r\n    \"status\": \"offline\" // online, offline\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/devices/:guid",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"devices",
+								":guid"
+							],
+							"variable": [
+								{
+									"key": "guid",
+									"value": "0197de6b-0d71-7102-9413-2ee874e14cfa"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"Device 10\",\r\n    \"location\": \"Location 5\",\r\n    \"status\": \"offline\" // online, offline\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/devices/:guid",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"devices",
+										":guid"
+									],
+									"variable": [
+										{
+											"key": "guid",
+											"value": "0197de6b-0d71-7102-9413-2ee874e14cfa"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Sun, 06 Jul 2025 06:37:54 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "47"
+								},
+								{
+									"key": "X-Ratelimit-Limit",
+									"value": "20"
+								},
+								{
+									"key": "X-Ratelimit-Remaining",
+									"value": "18"
+								},
+								{
+									"key": "X-Ratelimit-Reset",
+									"value": "18"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": null,\n    \"message\": \"Success update device\"\n}"
+						},
+						{
+							"name": "Invalid Status",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"Device 5\",\r\n    \"location\": \"Location 5\",\r\n    \"status\": \"onlinee\" // online, offline\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/devices/:guid",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"devices",
+										":guid"
+									],
+									"variable": [
+										{
+											"key": "guid",
+											"value": "0197de6b-0d71-7102-9413-2ee874e14cfa"
+										}
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Sun, 06 Jul 2025 06:37:13 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "117"
+								},
+								{
+									"key": "X-Ratelimit-Limit",
+									"value": "20"
+								},
+								{
+									"key": "X-Ratelimit-Remaining",
+									"value": "19"
+								},
+								{
+									"key": "X-Ratelimit-Reset",
+									"value": "60"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"error\": {\n        \"status\": \"Field Status must be one of [online offline]\"\n    },\n    \"message\": \"There are some errors in your request\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Delete",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/devices/:guid",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"devices",
+								":guid"
+							],
+							"variable": [
+								{
+									"key": "guid",
+									"value": "0197de68-226d-7d00-80e2-d4adf76cf55e"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/devices/:guid",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"devices",
+										":guid"
+									],
+									"variable": [
+										{
+											"key": "guid",
+											"value": "0197de68-226d-7d00-80e2-d4adf76cf55e"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Sun, 06 Jul 2025 06:38:28 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "47"
+								},
+								{
+									"key": "X-Ratelimit-Limit",
+									"value": "20"
+								},
+								{
+									"key": "X-Ratelimit-Remaining",
+									"value": "19"
+								},
+								{
+									"key": "X-Ratelimit-Reset",
+									"value": "60"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": null,\n    \"message\": \"Success delete device\"\n}"
+						}
+					]
+				}
+			]
+		}
+	],
+	"variable": [
+		{
+			"key": "token",
+			"value": ""
+		},
+		{
+			"key": "refresh-token",
+			"value": ""
+		}
+	]
+}
