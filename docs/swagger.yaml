@@ -1,0 +1,512 @@
+basePath: /
+definitions:
+  kernel.paginatePayload:
+    properties:
+      current_page:
+        type: integer
+      per_page:
+        type: integer
+      total_data:
+        type: integer
+      total_page:
+        type: number
+    type: object
+  kernel.responseDataPayload:
+    properties:
+      data: {}
+      message:
+        type: string
+      total_data:
+        type: integer
+    type: object
+  kernel.responseErrorPayload:
+    properties:
+      error: {}
+      message:
+        type: string
+    type: object
+  kernel.responsePaginatePayload:
+    properties:
+      data: {}
+      message:
+        type: string
+      paginate:
+        $ref: '#/definitions/kernel.paginatePayload'
+    type: object
+  payload.CreateDeviceRequest:
+    properties:
+      location:
+        type: string
+      name:
+        type: string
+      status:
+        enum:
+        - online
+        - offline
+        type: string
+    required:
+    - location
+    - name
+    - status
+    type: object
+  payload.CreateUserRequest:
+    properties:
+      email:
+        type: string
+      password:
+        type: string
+      role_guid:
+        type: string
+    required:
+    - email
+    - role_guid
+    type: object
+  payload.LoginRequest:
+    properties:
+      email:
+        type: string
+      password:
+        type: string
+    required:
+    - email
+    - password
+    type: object
+  payload.RefreshTokenRequest:
+    properties:
+      refresh_token:
+        type: string
+    type: object
+  payload.UpdateDeviceRequest:
+    properties:
+      guid:
+        type: string
+      location:
+        type: string
+      name:
+        type: string
+      status:
+        enum:
+        - online
+        - offline
+        type: string
+    required:
+    - location
+    - name
+    - status
+    type: object
+  payload.UpdateUserRequest:
+    properties:
+      email:
+        type: string
+      guid:
+        type: string
+      password:
+        type: string
+      role_guid:
+        type: string
+    required:
+    - email
+    - role_guid
+    type: object
+host: localhost:8000
+info:
+  contact: {}
+  description: API technical test Abarobotics
+  title: Abarobotics API
+  version: "1.0"
+paths:
+  /auth/login:
+    post:
+      consumes:
+      - application/json
+      description: Login to system and get access token & refresh token
+      parameters:
+      - description: Login credentials
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/payload.LoginRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/kernel.responseDataPayload'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/kernel.responseErrorPayload'
+      summary: Login
+      tags:
+      - Auth
+  /auth/logout:
+    post:
+      consumes:
+      - application/json
+      description: Logout user and invalidate current session (need valid JWT)
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/kernel.responseDataPayload'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/kernel.responseErrorPayload'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/kernel.responseErrorPayload'
+      security:
+      - BearerAuth: []
+      summary: Logout
+      tags:
+      - Auth
+  /auth/refresh-token:
+    post:
+      consumes:
+      - application/json
+      description: Get new access token using refresh token
+      parameters:
+      - description: Refresh token payload
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/payload.RefreshTokenRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/kernel.responseDataPayload'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/kernel.responseErrorPayload'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/kernel.responseErrorPayload'
+      summary: Refresh Token
+      tags:
+      - Auth
+  /devices:
+    get:
+      consumes:
+      - application/json
+      description: Get list of devices with search & pagination
+      parameters:
+      - description: Search keyword
+        in: query
+        name: search
+        type: string
+      - description: Sort field (name, location, status, created_at, updated_at)
+        in: query
+        name: sort
+        type: string
+      - description: Sort direction (ASC or DESC)
+        in: query
+        name: direction
+        type: string
+      - description: Page number
+        in: query
+        name: page
+        type: integer
+      - description: Limit per page
+        in: query
+        name: limit
+        type: integer
+      - description: Filter by status (online, offline)
+        in: query
+        name: status
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/kernel.responsePaginatePayload'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/kernel.responseErrorPayload'
+      summary: Get list of devices
+      tags:
+      - Device
+    post:
+      consumes:
+      - application/json
+      description: Create new device
+      parameters:
+      - description: Device creation payload
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/payload.CreateDeviceRequest'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/kernel.responseDataPayload'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/kernel.responseErrorPayload'
+      summary: Create device
+      tags:
+      - Device
+  /devices/{guid}:
+    delete:
+      consumes:
+      - application/json
+      description: Delete device by GUID
+      parameters:
+      - description: Device GUID
+        in: path
+        name: guid
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/kernel.responseDataPayload'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/kernel.responseErrorPayload'
+      summary: Delete device
+      tags:
+      - Device
+    get:
+      consumes:
+      - application/json
+      description: Get detail of a device by GUID
+      parameters:
+      - description: Device GUID
+        in: path
+        name: guid
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/kernel.responseDataPayload'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/kernel.responseErrorPayload'
+      summary: Get device detail
+      tags:
+      - Device
+    put:
+      consumes:
+      - application/json
+      description: Update existing device by GUID
+      parameters:
+      - description: Device GUID
+        in: path
+        name: guid
+        required: true
+        type: string
+      - description: Device update payload
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/payload.UpdateDeviceRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/kernel.responseDataPayload'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/kernel.responseErrorPayload'
+      summary: Update device
+      tags:
+      - Device
+  /users:
+    get:
+      consumes:
+      - application/json
+      description: Get list of users with search & pagination
+      parameters:
+      - description: Search keyword
+        in: query
+        name: search
+        type: string
+      - description: Sort field (email, role_name, created_at, updated_at)
+        in: query
+        name: sort
+        type: string
+      - description: Sort direction (ASC or DESC)
+        in: query
+        name: direction
+        type: string
+      - description: Page number
+        in: query
+        name: page
+        type: integer
+      - description: Limit per page
+        in: query
+        name: limit
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/kernel.responsePaginatePayload'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/kernel.responseErrorPayload'
+      summary: Get list of users
+      tags:
+      - User
+    post:
+      consumes:
+      - application/json
+      description: Create new user
+      parameters:
+      - description: User creation payload
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/payload.CreateUserRequest'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/kernel.responseDataPayload'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/kernel.responseErrorPayload'
+      summary: Create user
+      tags:
+      - User
+  /users/{guid}:
+    delete:
+      consumes:
+      - application/json
+      description: Delete user by GUID
+      parameters:
+      - description: User GUID
+        in: path
+        name: guid
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/kernel.responseDataPayload'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/kernel.responseErrorPayload'
+      summary: Delete user
+      tags:
+      - User
+    get:
+      consumes:
+      - application/json
+      description: Get detail of a user by GUID
+      parameters:
+      - description: User GUID
+        in: path
+        name: guid
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/kernel.responseDataPayload'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/kernel.responseErrorPayload'
+      summary: Get user detail
+      tags:
+      - User
+    put:
+      consumes:
+      - application/json
+      description: Update existing user by GUID
+      parameters:
+      - description: User GUID
+        in: path
+        name: guid
+        required: true
+        type: string
+      - description: User update payload
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/payload.UpdateUserRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/kernel.responseDataPayload'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/kernel.responseErrorPayload'
+      summary: Update user
+      tags:
+      - User
+  /users/me:
+    get:
+      consumes:
+      - application/json
+      description: Get profile of a user logged in
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/kernel.responseDataPayload'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/kernel.responseErrorPayload'
+      summary: Get user profile
+      tags:
+      - User
+schemes:
+- http
+swagger: "2.0"

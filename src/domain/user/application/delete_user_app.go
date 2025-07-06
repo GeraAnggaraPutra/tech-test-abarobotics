@@ -13,6 +13,15 @@ import (
 	"abarobotics-test/toolkit/logger"
 )
 
+// @Summary      Delete user
+// @Description  Delete user by GUID
+// @Tags         User
+// @Accept       json
+// @Produce      json
+// @Param        guid   path      string  true  "User GUID"
+// @Success      200  {object}  kernel.responseDataPayload
+// @Failure      400  {object}  kernel.responseErrorPayload
+// @Router       /users/{guid} [delete]
 func deleteUserApp(svc *service.Service, validate *validator.Validator) fiber.Handler {
 	return func(c *fiber.Ctx) (err error) {
 		var request payload.GUIDRequest

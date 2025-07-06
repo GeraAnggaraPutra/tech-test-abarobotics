@@ -22,7 +22,7 @@ func RunFiberServer(ctx context.Context, k *kernel.Kernel) {
 		DisableStartupMessage: true,
 	})
 
-	app.Get("/swagger/*", swagger.HandlerDefault)
+	app.Get("/docs/*", swagger.HandlerDefault)
 
 	if cfg.Prometheus {
 		prometheus := fiberprometheus.New(cfg.Name)

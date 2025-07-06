@@ -7,6 +7,7 @@ import (
 
 	"github.com/joho/godotenv"
 
+	_ "abarobotics-test/docs"
 	"abarobotics-test/src/api"
 	"abarobotics-test/src/kernel"
 	"abarobotics-test/toolkit/config"
@@ -14,13 +15,12 @@ import (
 	"abarobotics-test/toolkit/logger"
 )
 
-// @title           ABAROBOTICS API
-// @version         1.0
-// @description     Technical Test
-// @contact.name    Tim Developer
-// @contact.email   anggaragera@gamil.com
-// @host            localhost:8000
-// @BasePath        /
+// @title Abarobotics API
+// @version 1.0
+// @description API technical test Abarobotics
+// @host localhost:8000
+// @BasePath /
+// @schemes http
 func main() {
 	var err error
 

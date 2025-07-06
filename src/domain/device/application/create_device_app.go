@@ -14,6 +14,15 @@ import (
 	"abarobotics-test/toolkit/logger"
 )
 
+// @Summary      Create device
+// @Description  Create new device
+// @Tags         Device
+// @Accept       json
+// @Produce      json
+// @Param        request  body      payload.CreateDeviceRequest  true  "Device creation payload"
+// @Success      201  {object}  kernel.responseDataPayload
+// @Failure      400  {object}  kernel.responseErrorPayload
+// @Router       /devices [post]
 func createDeviceApp(svc *service.Service, validate *validator.Validator) fiber.Handler {
 	return func(c *fiber.Ctx) (err error) {
 		var request payload.CreateDeviceRequest

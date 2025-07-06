@@ -12,9 +12,18 @@ import (
 	"abarobotics-test/src/handler/validator"
 	"abarobotics-test/src/kernel"
 	"abarobotics-test/toolkit/logger"
-
 )
 
+// @Summary      Update user
+// @Description  Update existing user by GUID
+// @Tags         User
+// @Accept       json
+// @Produce      json
+// @Param        guid     path      string  true  "User GUID"
+// @Param        request  body      payload.UpdateUserRequest  true  "User update payload"
+// @Success      200  {object}  kernel.responseDataPayload
+// @Failure      400  {object}  kernel.responseErrorPayload
+// @Router       /users/{guid} [put]
 func updateUserApp(svc *service.Service, validate *validator.Validator) fiber.Handler {
 	return func(c *fiber.Ctx) (err error) {
 		var request payload.UpdateUserRequest
@@ -28,7 +37,6 @@ func updateUserApp(svc *service.Service, validate *validator.Validator) fiber.Ha
 			err = logger.PrintNewError(err, constant.ErrFailedParseRequest)
 			return
 		}
-		
 
 		if err := validate.Validate(request); err != nil {
 			logger.PrintError(err, "error validation update user request")

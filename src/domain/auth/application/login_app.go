@@ -13,6 +13,15 @@ import (
 	"abarobotics-test/toolkit/logger"
 )
 
+// @Summary      Login
+// @Description  Login to system and get access token & refresh token
+// @Tags         Auth
+// @Accept       json
+// @Produce      json
+// @Param        request body payload.LoginRequest true "Login credentials"
+// @Success      200  {object}  kernel.responseDataPayload
+// @Failure      400  {object}  kernel.responseErrorPayload
+// @Router       /auth/login [post]
 func loginApp(svc *service.Service, validate *validator.Validator) fiber.Handler {
 	return func(c *fiber.Ctx) (err error) {
 		var request payload.LoginRequest
@@ -26,10 +35,12 @@ func loginApp(svc *service.Service, validate *validator.Validator) fiber.Handler
 			return kernel.ResponseErrorValidate(c, err)
 		}
 
-		request.UserAgent = string(c.Request().Header.UserAgent())
-		request.IPAddress = c.IP()
+		var (
+			userAgent = string(c.Request().Header.UserAgent())
+			iPAddress = c.IP()
+		)
 
-		data, user, err := svc.LoginService(c.UserContext(), request)
+		data, user, err := svc.LoginService(c.UserContext(), request, userAgent, iPAddress)
 		if err != nil {
 			return kernel.ResponseError(c, err, msgFailedLogin)
 		}

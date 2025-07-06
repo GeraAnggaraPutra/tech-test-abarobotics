@@ -13,6 +13,15 @@ import (
 	"abarobotics-test/toolkit/logger"
 )
 
+// @Summary      Get device detail
+// @Description  Get detail of a device by GUID
+// @Tags         Device
+// @Accept       json
+// @Produce      json
+// @Param        guid   path      string  true  "Device GUID"
+// @Success      200  {object}  kernel.responseDataPayload
+// @Failure      400  {object}  kernel.responseErrorPayload
+// @Router       /devices/{guid} [get]
 func readDeviceDetailApp(svc *service.Service, validate *validator.Validator) fiber.Handler {
 	return func(c *fiber.Ctx) (err error) {
 		var request payload.GUIDRequest

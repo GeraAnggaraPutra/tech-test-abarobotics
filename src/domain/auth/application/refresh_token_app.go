@@ -13,6 +13,16 @@ import (
 	"abarobotics-test/toolkit/logger"
 )
 
+// @Summary      Refresh Token
+// @Description  Get new access token using refresh token
+// @Tags         Auth
+// @Accept       json
+// @Produce      json
+// @Param        request body payload.RefreshTokenRequest true "Refresh token payload"
+// @Success      200  {object}  kernel.responseDataPayload
+// @Failure      400  {object}  kernel.responseErrorPayload
+// @Failure      401  {object}  kernel.responseErrorPayload
+// @Router       /auth/refresh-token [post]
 func refreshTokenApp(svc *service.Service, validate *validator.Validator) fiber.Handler {
 	return func(c *fiber.Ctx) (err error) {
 		var request payload.RefreshTokenRequest

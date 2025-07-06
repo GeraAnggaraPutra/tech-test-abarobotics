@@ -14,6 +14,16 @@ import (
 	"abarobotics-test/toolkit/logger"
 )
 
+// @Summary      Update device
+// @Description  Update existing device by GUID
+// @Tags         Device
+// @Accept       json
+// @Produce      json
+// @Param        guid     path      string  true  "Device GUID"
+// @Param        request  body      payload.UpdateDeviceRequest  true  "Device update payload"
+// @Success      200  {object}  kernel.responseDataPayload
+// @Failure      400  {object}  kernel.responseErrorPayload
+// @Router       /devices/{guid} [put]
 func updateDeviceApp(svc *service.Service, validate *validator.Validator) fiber.Handler {
 	return func(c *fiber.Ctx) (err error) {
 		var request payload.UpdateDeviceRequest

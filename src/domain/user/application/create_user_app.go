@@ -14,6 +14,15 @@ import (
 	"abarobotics-test/toolkit/logger"
 )
 
+// @Summary      Create user
+// @Description  Create new user
+// @Tags         User
+// @Accept       json
+// @Produce      json
+// @Param        request  body      payload.CreateUserRequest  true  "User creation payload"
+// @Success      201  {object}  kernel.responseDataPayload
+// @Failure      400  {object}  kernel.responseErrorPayload
+// @Router       /users [post]
 func createUserApp(svc *service.Service, validate *validator.Validator) fiber.Handler {
 	return func(c *fiber.Ctx) (err error) {
 		var request payload.CreateUserRequest

@@ -18,6 +18,7 @@ import (
 func (s *Service) LoginService(
 	ctx context.Context,
 	request payload.LoginRequest,
+	userAgent, iPAddress string,
 ) (data model.Session, user model.User, err error) {
 	tx, err := s.db.BeginTxx(ctx, &sql.TxOptions{})
 	if err != nil {
@@ -55,9 +56,9 @@ func (s *Service) LoginService(
 		return
 	}
 
-	data, err = helper.GenerateSessionModel(ctx, request.ToSessionPayload(user.GUID))
+	data, err = helper.GenerateSessionModel(ctx, request.ToSessionPayload(user.GUID, userAgent, iPAddress))
 	if err != nil {
-		logger.PrintError(err, "error generate session model", "session payload", request.ToSessionPayload(user.GUID))
+		logger.PrintError(err, "error generate session model", "session payload", request.ToSessionPayload(user.GUID, userAgent, iPAddress))
 		return
 	}
 
