@@ -51,6 +51,7 @@ func (s *Service) UpdateUserService(
 	err = q.UpdateUserQuery(ctx, request.ToParams(userGUID, password))
 	if err != nil {
 		logger.WithContext(ctx).Error(err, "error update user query", "request", request)
+		return
 	}
 
 	if err = tx.Commit(); err != nil {

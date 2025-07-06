@@ -7,6 +7,7 @@ import (
 type SessionPayload struct {
 	SessionGUID string `json:"session_guid"`
 	UserGUID    string `json:"user_guid"`
+	RoleGUID    string `json:"role_guid"`
 	UserAgent   string `json:"user_agent"`
 	IPAddress   string `json:"ip_address"`
 }
@@ -17,6 +18,7 @@ func (request *SessionPayload) ToAccessTokenRequest() (
 	params = jwt.AccessTokenPayload{
 		GUID:     request.SessionGUID,
 		UserGUID: request.UserGUID,
+		RoleGUID: request.RoleGUID,
 	}
 
 	return

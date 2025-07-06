@@ -10,6 +10,7 @@ import (
 type AccessTokenPayload struct {
 	GUID     string
 	UserGUID string
+	RoleGUID string
 }
 
 // Generate access token with signing JWT method HS256.
@@ -22,9 +23,10 @@ func GenerateAccessToken(request AccessTokenPayload) (response TokenPayload, err
 	expiresAt := time.Now().Add(expiredDuration)
 
 	claims := &jwt.MapClaims{
-		"jti": request.GUID,
-		"exp": expiresAt.Unix(),
-		"uri": request.UserGUID,
+		"jti":  request.GUID,
+		"exp":  expiresAt.Unix(),
+		"uri":  request.UserGUID,
+		"role": request.RoleGUID,
 	}
 
 	token, err := GenerateJWT(claims, os.Getenv("AUTH_ACCESS_TOKEN_SECRET_KEY"))
@@ -50,6 +52,7 @@ func ClaimsAccessToken(token string) (response AccessTokenPayload, err error) {
 	response = AccessTokenPayload{
 		GUID:     claims["jti"].(string),
 		UserGUID: claims["uri"].(string),
+		RoleGUID: claims["role"].(string),
 	}
 
 	return

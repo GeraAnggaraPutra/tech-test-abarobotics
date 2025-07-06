@@ -56,9 +56,9 @@ func (s *Service) LoginService(
 		return
 	}
 
-	data, err = helper.GenerateSessionModel(ctx, request.ToSessionPayload(user.GUID, userAgent, iPAddress))
+	data, err = helper.GenerateSessionModel(ctx, request.ToSessionPayload(user.GUID, user.RoleGUID, userAgent, iPAddress))
 	if err != nil {
-		logger.PrintError(err, "error generate session model", "session payload", request.ToSessionPayload(user.GUID, userAgent, iPAddress))
+		logger.PrintError(err, "error generate session model", "session payload", request.ToSessionPayload(user.GUID, user.RoleGUID, userAgent, iPAddress))
 		return
 	}
 

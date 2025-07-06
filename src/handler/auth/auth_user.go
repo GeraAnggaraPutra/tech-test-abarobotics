@@ -1,13 +1,14 @@
 package auth
 
 import (
+	"context"
+
 	"abarobotics-test/src/model"
 	"abarobotics-test/src/query"
 	"abarobotics-test/toolkit/logger"
-	"context"
 )
 
-func (a *Auth) User(ctx context.Context) (data model.User, err error) {
+func (a *Auth) XX(ctx context.Context) (data model.User, err error) {
 	q := query.NewQuery(a.db)
 
 	data, err = q.ReadDetailUserQuery(ctx, a.claims.UserGUID)

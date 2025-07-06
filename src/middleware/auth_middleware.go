@@ -62,3 +62,21 @@ func parseHeaderToken(headerDataToken string) (string, error) {
 
 	return splitToken[1], nil
 }
+
+func (et *EnsureToken) ValidatePermissionAction(permissionName, actionName string) fiber.Handler {
+	return func(c *fiber.Ctx) error {
+		roleGUID := et.auth.GetClaims().RoleGUID
+
+		ok, err := et.auth.CheckPermissionAction(c.UserContext(), roleGUID, permissionName, actionName)
+		if err != nil {
+			logger.PrintError(err, "error check permission action query")
+			return fiber.NewError(http.StatusForbidden, "failed to check permission")
+		}
+
+		if !ok {
+			return fiber.NewError(http.StatusForbidden, constant.ErrForbiddenPermission.Error())
+		}
+
+		return c.Next()
+	}
+}
