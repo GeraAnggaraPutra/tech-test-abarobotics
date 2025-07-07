@@ -49,16 +49,6 @@ func (q *Query) ReadListDeviceQuery(
 		OFFSET $7
 	`
 
-	err = q.db.SelectContext(ctx, &data, stmt,
-		args.SetSearch,
-		args.Search,
-		args.SetStatus,
-		args.Status,
-		args.Order,
-		args.Limit,
-		args.Offset,
-	)
-
 	rows, err := q.db.QueryxContext(ctx, stmt,
 		args.SetSearch,
 		args.Search,
